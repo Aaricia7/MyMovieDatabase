@@ -1,4 +1,5 @@
 var table = $("#table").DataTable();
+
 getAll();
 
 $("#btnAddMovie").click(function (e) {
@@ -24,8 +25,9 @@ function getAll() {
     $.get("/api/movies/", function (result) {
         table.clear();
         for (var i = 0; i < result.length; i++) {
+            var watched = (result[i].watched) ? "Yes" : "No";
             table.row.add([ result[i].title,
-                            result[i].watched,
+                            watched,
                             "<a href=\"javascript:del(" + result[i].movieID + ")\"><font color='#ff3385'><i class='fa fa-trash-o' aria-hidden='true'></i></font></a>",
                             "<a href=\"javascript:edit("+result[i].movieID+")\"><font color='#ff3385'><i class='fa fa-pencil' aria-hidden='true'></i></font></a>"]);
         }
@@ -56,9 +58,10 @@ function del(id) {
 
 function edit(id) {
     $.get({url:"/api/movies/"+id+"/", type:"GET"}).done( function(result) {
+        var watched = result.watched;
         $("#editID").val(result.movieID);
         $("#editName").val(result.title);
-        $("#watched").val(result.watched);
+        $('#editWatched option:contains(' +  watched + ')').prop({selected: true});
         $("#movieModal").modal("toggle");
     })
 }
@@ -67,7 +70,7 @@ $("#btnUpdateMovie").click( function (e) {
     e.preventDefault();
     var obj = {};
     obj.title = $("#editName").val();
-    obj.watched = $("#watched").val();
+    obj.watched = $("#editWatched").val();
     obj.movieID = $("#editID").val();
     $.ajax({
             url: "/api/movies/",
