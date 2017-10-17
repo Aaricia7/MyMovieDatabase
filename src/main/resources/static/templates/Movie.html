@@ -16,7 +16,7 @@
         <button type='button' id='btnAddMovie' class='btn btn-primary'>Add</button>
     </div>
     <div class="col-md-2">
-        <input type="hidden" id="id">
+        <input type="hidden" id="addID">
     </div>
 </div>
 
@@ -38,13 +38,39 @@
         <tr>
             <th>Movie name</th>
             <th>Watched?</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <th>Delete movie</th>
+            <th>Edit title</th>
         </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
+</div>
+
+<div class="modal fade" id="movieModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id='editGuest'>Change movie title</h4>
+            </div>
+            <form id="editMovie">
+                <div class="modal-body">
+                    <input type="hidden" id="editID">
+                    <input type="hidden" id="watched">
+                    <legend></legend>
+                    <div class="form-group row">
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="editName" id="editName" placeholder="Change movie name" required>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type='button' id='btnUpdateMovie' class='btn btn-primary'>Edit movie title</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script src="js/Movie.js"></script>

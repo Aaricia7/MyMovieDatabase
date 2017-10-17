@@ -1,8 +1,12 @@
 var table = $("#table").DataTable();
+getAll();
 
 $("#btnAddMovie").click(function (e) {
     e.preventDefault();
-    var obj = getObject();
+    var obj = {};
+    obj.title = $("#movieName").val();
+    obj.watched =  false;
+    obj.movieID = $("#addID").val();
     $("#movieName").val("");
     $.ajax({
         url: "/api/movies/",
@@ -50,11 +54,31 @@ function del(id) {
     });
 }
 
-function getObject() {
-    var obj = {};
-    obj.title = $("#movieName").val();
-    obj.watched =  false;
-    obj.movieID = $("#id").val();
-    return obj;
+function edit(id) {
+    $.get({url:"/api/movies/"+id+"/", type:"GET"}).done( function(result) {
+        $("#editID").val(result.movieID);
+        $("#editName").val(result.title);
+        $("#watched").val(result.watched);
+        $("#movieModal").modal("toggle");
+    })
 }
 
+$("#btnUpdateMovie").click( function (e) {
+    e.preventDefault();
+    var obj = {};
+    obj.title = $("#editName").val();
+    obj.watched = $("#watched").val();
+    obj.movieID = $("#editID").val();
+    $.ajax({
+            url: "/api/movies/",
+            method:"PUT",
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                $("#movieModal").modal("toggle");
+                $("#movieModal input").val("");
+                getAll();
+            },
+            error: function() {}
+    });
+})

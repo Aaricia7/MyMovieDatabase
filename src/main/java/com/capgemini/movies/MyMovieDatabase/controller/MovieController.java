@@ -29,4 +29,14 @@ public class MovieController {
         movieRepository.delete(id);
     }
 
+    @RequestMapping(value="{id}/", method= RequestMethod.GET)
+    public Movie get(@PathVariable long id) {
+        return movieRepository.findOne(id);
+    }
+
+    @RequestMapping(value="", method=RequestMethod.PUT)
+    public void save(@RequestBody Movie movie) {
+        movieRepository.save(movie);
+    }
+
 }
