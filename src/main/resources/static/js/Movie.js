@@ -3,6 +3,7 @@ var table = $("#table").DataTable();
 $("#btnAddMovie").click(function (e) {
     e.preventDefault();
     var obj = getObject();
+    $("#movieName").val("");
     $.ajax({
         url: "/api/movies/",
         type: "POST",
@@ -25,6 +26,27 @@ function getAll() {
                             "<a href=\"javascript:edit("+result[i].movieID+")\"><font color='#ff3385'><i class='fa fa-pencil' aria-hidden='true'></i></font></a>"]);
         }
         table.draw();
+    });
+}
+
+function del(id) {
+    $.confirm({
+        title: "Confirm removal",
+        content: "Are you sure you want to delete this movie?",
+        buttons: {
+            confirm: function () {
+                $.ajax({url: "/api/movies/"+id+"/", type: "DELETE",
+                    success: function() {
+                        getAll();
+                        $.alert("Movie is deleted.");
+                    },
+                    error: function(err) {
+                    }
+                });
+            },
+            cancel: function () {
+            }
+        }
     });
 }
 
