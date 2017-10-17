@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * This
- */
 @RestController
 @RequestMapping("/api/movies/")
 public class MovieController {

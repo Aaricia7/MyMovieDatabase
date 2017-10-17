@@ -2,6 +2,12 @@ var table = $("#table").DataTable();
 
 getAll();
 
+$('.click_on_enterkey').on('keyup',function(event){
+  if(event.keyCode == 13){
+    $(this).click();
+  }
+});
+
 $("#btnAddMovie").click(function (e) {
     e.preventDefault();
     var obj = {};
@@ -20,6 +26,7 @@ $("#btnAddMovie").click(function (e) {
         },
         error: function(jqXHR, status, thrownError) {
              var responseText = jQuery.parseJSON(jqXHR.responseText);
+             $("#txtFailAdd").html("");
              for (var i=0;i<responseText.length;i++) {
                 $("#txtFailAdd").append(responseText[i]+"<br>");
              }
@@ -91,6 +98,7 @@ $("#btnUpdateMovie").click( function (e) {
             },
             error: function(jqXHR, status, thrownError) {
                 var responseText = jQuery.parseJSON(jqXHR.responseText);
+                $("#txtFailAdd").html("");
                 for (var i=0;i<responseText.length;i++) {
                 $("#txtFailEdit").append(responseText[i]+"<br>");
                 }

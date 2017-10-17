@@ -11,7 +11,5 @@ text-decoration: underline;
 cursor: pointer;
 }
 
-.button {
-    background-color: #ff3385;
-}
+.background {background-color:#ff3385;}
 
