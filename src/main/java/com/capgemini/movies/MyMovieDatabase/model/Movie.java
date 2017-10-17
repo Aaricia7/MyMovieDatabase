@@ -1,5 +1,7 @@
 package com.capgemini.movies.MyMovieDatabase.model;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long movieID;
+    @Length(min = 1, message = "Enter a movie name.")
     private String title;
     private boolean watched;
 

@@ -16,8 +16,14 @@ $("#btnAddMovie").click(function (e) {
         contentType: "application/json; charset=utf-8",
         success: function(result) {
             getAll();
+            $("#txtFailAdd").html("");
         },
-        error: function() { }
+        error: function(jqXHR, status, thrownError) {
+             var responseText = jQuery.parseJSON(jqXHR.responseText);
+             for (var i=0;i<responseText.length;i++) {
+                $("#txtFailAdd").append(responseText[i]+"<br>");
+             }
+        }
     });
 });
 
@@ -28,8 +34,8 @@ function getAll() {
             var watched = (result[i].watched) ? "Yes" : "No";
             table.row.add([ result[i].title,
                             watched,
-                            "<a href=\"javascript:del(" + result[i].movieID + ")\"><font color='#ff3385'><i class='fa fa-trash-o' aria-hidden='true'></i></font></a>",
-                            "<a href=\"javascript:edit("+result[i].movieID+")\"><font color='#ff3385'><i class='fa fa-pencil' aria-hidden='true'></i></font></a>"]);
+                            "<a href=\"javascript:edit("+result[i].movieID+")\"><font color='#ff3385'><i class='fa fa-pencil' aria-hidden='true'></i></font></a>",
+                            "<a href=\"javascript:del(" + result[i].movieID + ")\"><font color='#ff3385'><i class='fa fa-trash-o' aria-hidden='true'></i></font></a>"]);
         }
         table.draw();
     });
@@ -81,7 +87,13 @@ $("#btnUpdateMovie").click( function (e) {
                 $("#movieModal").modal("toggle");
                 $("#movieModal input").val("");
                 getAll();
+                $("#txtFailEdit").html("");
             },
-            error: function() {}
+            error: function(jqXHR, status, thrownError) {
+                var responseText = jQuery.parseJSON(jqXHR.responseText);
+                for (var i=0;i<responseText.length;i++) {
+                $("#txtFailEdit").append(responseText[i]+"<br>");
+                }
+            }
     });
 })
