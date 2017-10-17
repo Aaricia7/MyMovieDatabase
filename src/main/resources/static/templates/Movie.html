@@ -5,7 +5,43 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <h2><font color="#ff3385">Add a movie:</font></h2>
+    <div class="col-md-2">
+        <h4><font color="#ff3385">Add a movie:</font></h4>
+        <br>
+    </div>
+    <div class="col-md-5">
+        <input type="text" class="form-control" name="movieName" id="movieName" placeholder="Movie name" required>
+    </div>
+    <div class="col-md-5">
+        <button type='button' id='btnAddMovie' class='btn btn-primary'>Add</button>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <br/>
+    </div>
+</div>
+
+<div class="row">
+    <table class="table table-hover" id="table">
+        <colgroup>
+            <col span="1" style="width: 70%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 10%;">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>Movie name</th>
+            <th>Watched?</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="js/Movie.js"></script>
